@@ -2,6 +2,7 @@
 #include<string.h>
 using std::cout;
 using std::cin;
+using std::system;
 
 char b1,b2,b3,b4,b5,b6,b7,b8,b9;
 
@@ -11,7 +12,7 @@ bool win = false;
 bool p1=false,p2=false;
 char valid[9];
 int count = 0;
-
+int gcount = 0;
 bool validation(char input){
     valid[count] = input;
     int i = 0;
@@ -50,16 +51,23 @@ void board(){
 void game(){
     char play;
     
+    if(gcount == 9){
+        win = true;
+    }
     
-    if(win!=true){
+    if(win != true){
     cout<<"Player"<<a<<" turn, which block:";
     cin>>play;
-    }
+
     while(!validation(play)){
         board();
         cout<<"Player"<<a<<" Please Enter  A valid block: ";
         cin>>play;
     }
+
+    }
+    
+
     
     if(turn){
         if(play==b1) b1 = 'X';
@@ -112,6 +120,7 @@ void game(){
     turn = NULL;
     cout<<"Player2(O) Won The Game!!"<<std::endl;
     }
+    
 
 }
 
@@ -138,10 +147,15 @@ int main(){
         else{
             turn = true;
         }
+        gcount++;
         // Clear console
-        if(win == true){
+        if(win == true ){
         board();
         game();
+        if(win == true){
+            cout<<"**The Game Ended In A Draw!!**"<<std::endl;
+        }
+        
         break;
         }
     }
