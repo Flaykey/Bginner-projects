@@ -9,13 +9,15 @@ char b1,b2,b3,b4,b5,b6,b7,b8,b9;
 int a= 1;
 bool turn =true;
 bool win = false;
-bool p1=false,p2=false;
+bool p1 = false;
+bool p2=false;
 char valid[9];
 int count = 0;
 int gcount = 0;
+int i;
+
 bool validation(char input){
     valid[count] = input;
-    int i = 0;
     for(i=0;i<count;i++){
         if(valid[i]==input){
             return false;
@@ -51,11 +53,11 @@ void board(){
 void game(){
     char play;
     
-    if(gcount == 9){
+    if(gcount == 9 && p1 == p2){
         win = true;
     }
-    
-    if(win != true){
+    gcount++;
+    if(win != true && p1==p2){
     cout<<"Player"<<a<<" turn, which block:";
     cin>>play;
 
@@ -103,7 +105,7 @@ void game(){
     (b2 == b5 && b5 == b8 && b8 == 'X') ||
     (b3 == b6 && b6 == b9 && b9 == 'X')) {
     a=1;
-    win = true; 
+    p1 = true; 
     turn = NULL;
     cout<<"Player1(X) Won The Game!!"<<std::endl;
     }
@@ -116,7 +118,7 @@ void game(){
     (b2 == b5 && b5 == b8 && b8 == 'O') ||
     (b3 == b6 && b6 == b9 && b9 == 'O')) {
     a=2;
-    win = true; 
+    p2 = true; 
     turn = NULL;
     cout<<"Player2(O) Won The Game!!"<<std::endl;
     }
@@ -131,12 +133,17 @@ int main(){
 
 
     while(play){
-        win = false;
         blockInitialize();
         turn = true;
         a=1;
-
-        while(win!=true){
+        count = 0;
+        p1 = false;
+        p2 = false;
+        for(i=0;i<9;i++){
+            valid[i] = 0;
+        }
+        win = false;
+        while(p1==p2){
 
         board();
         game();
@@ -147,29 +154,34 @@ int main(){
         else{
             turn = true;
         }
-        gcount++;
         // Clear console
-        if(win == true ){
+        if(win == true || p1 == true || p2 == true ){
         board();
         game();
-        if(win == true && gcount == 9){
+        if(win == true){
             cout<<"**The Game Ended In A Draw!!**"<<std::endl;
         }
         
         break;
         }
     }
+
+    if(win==true || p1 !=p2){
     cout<<"Would you like to play again y/n:";
     cin>>willPlay;
+    
 
     if(willPlay=='y'){
         play = true;
+        win = false;
+
     }
     else{
         play = false;
+        cout<<"***THANKS FOR PLAYING!!***";
     }
     
-    
+    }
     }
     return 0;
 }
