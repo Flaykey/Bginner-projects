@@ -64,12 +64,11 @@ str words[] ={
 
 
 int x;
-str show,word;
+str show, word;
 int wlen;
 int i, gcount;
 
-
-
+//Function to get a random word
 void getWord(){
         system("cls");
         gcount = 1;
@@ -82,7 +81,7 @@ void getWord(){
         }
 }
 
-
+//function to show the game with pictures
 void hangmanPics(int a,str word){
     switch(a)
     {
