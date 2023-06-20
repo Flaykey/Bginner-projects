@@ -152,7 +152,7 @@ int main(){
         if(win == true ){
         board();
         game();
-        if(win == true){
+        if(win == true && gcount == 9){
             cout<<"**The Game Ended In A Draw!!**"<<std::endl;
         }
         
