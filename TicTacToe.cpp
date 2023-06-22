@@ -53,7 +53,7 @@ void board(){
 void game(){
     char play;
     
-    if(gcount == 9 && p1 == p2){
+    if(gcount == 9 && !p1 && !p2){
         win = true;
     }
     gcount++;
@@ -183,5 +183,6 @@ int main(){
     
     }
     }
+    system("pause>0");
     return 0;
 }
